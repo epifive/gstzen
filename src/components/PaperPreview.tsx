@@ -26,7 +26,7 @@ export function PaperPreview({ children, maxScale = 1 }: { children: ReactNode; 
   }, [maxScale]);
 
   return (
-    <div ref={outer} className="w-full" style={{ height: height * scale }}>
+    <div ref={outer} className="w-full overflow-hidden" style={{ height: height * scale }}>
       <div
         ref={inner}
         className="origin-top-left overflow-hidden rounded-sm shadow-[0_1px_3px_rgba(0,0,0,.08),0_12px_40px_-12px_rgba(15,23,42,.35)]"

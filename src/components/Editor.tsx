@@ -174,7 +174,7 @@ export function Editor({ initial }: { initial: Doc }) {
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] xl:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] xl:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
         {/* Form */}
         <div className={`no-print space-y-4 ${tab === "preview" ? "hidden lg:block" : ""}`}>
           <Section title={`${typeLabel} details`} description="Number, dates and title">
@@ -416,7 +416,7 @@ export function Editor({ initial }: { initial: Doc }) {
 
         {/* Preview */}
         <div className={`${tab === "edit" ? "hidden lg:block" : ""}`}>
-          <div className="lg:sticky lg:top-[7.5rem]">
+          <div className="lg:sticky lg:top-[7.5rem] lg:max-h-[calc(100vh-8.5rem)] lg:overflow-y-auto lg:rounded-xl">
             <div ref={pageRef} className="rounded-xl bg-slate-100 p-3 sm:p-5 dark:bg-slate-900">
               <PaperPreview>{preview}</PaperPreview>
             </div>
