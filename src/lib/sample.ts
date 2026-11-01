@@ -9,7 +9,7 @@ const gstin = (first14: string) => first14 + gstinCheckChar(first14);
 const LOGO =
   "data:image/svg+xml;utf8," +
   encodeURIComponent(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#4f46e5"/><path d="M24 30h48M24 48h48M24 66h48" stroke="#99f6e4" stroke-width="7" stroke-linecap="round"/><path d="M34 22v52M62 22v52" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".85"/></svg>`,
+    `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96"><rect width="96" height="96" rx="22" fill="#4f46e5"/><path d="M24 30h48M24 48h48M24 66h48" stroke="#99f6e4" stroke-width="7" stroke-linecap="round"/><path d="M34 22v52M62 22v52" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".85"/></svg>`,
   );
 
 function item(description: string, hsn: string, qty: number, unit: string, rate: number, taxRate: number, discountPct = 0): LineItem {

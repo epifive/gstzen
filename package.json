@@ -1,13 +1,14 @@
 {
   "name": "gstzen",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "postbuild": "node scripts/fix-export-segments.mjs out"
   },
   "dependencies": {
     "html-to-image": "^1.11.13",
@@ -28,5 +29,7 @@
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^5.0.5"
-  }
+  },
+  "description": "GST/VAT invoice, quotation and receipt maker with UPI QR. Static, client-side, open source.",
+  "license": "MIT"
 }
