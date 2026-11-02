@@ -1,8 +1,8 @@
 import { defaultSettings, emptyBusiness, emptyParty, newItem } from "./defaults";
 import type { Doc, LineItem, Settings, StoreData } from "./types";
+import { EXPORT_KIND, LEGACY_EXPORT_KIND, LEGACY_STORAGE_KEY, LEGACY_THEME_KEY, STORAGE_KEY, THEME_KEY } from "./keys";
 
-export const STORAGE_KEY = "gstzen:v1";
-export const EXPORT_KIND = "gstzen-backup";
+export { EXPORT_KIND, STORAGE_KEY };
 
 type Obj = Record<string, unknown>;
 const isObj = (v: unknown): v is Obj => typeof v === "object" && v !== null && !Array.isArray(v);
@@ -89,7 +89,7 @@ export function normalizeDoc(raw: unknown): Doc | null {
 /** Validates and upgrades anything that looks like store data. Returns null if it is not usable. */
 export function normalizeStore(raw: unknown): StoreData | null {
   if (!isObj(raw)) return null;
-  const data = raw.kind === EXPORT_KIND && isObj(raw.data) ? raw.data : raw;
+  const data = (raw.kind === EXPORT_KIND || raw.kind === LEGACY_EXPORT_KIND) && isObj(raw.data) ? raw.data : raw;
   if (!isObj(data.settings) && !Array.isArray(data.docs)) return null;
   const docs = Array.isArray(data.docs) ? data.docs.map(normalizeDoc).filter((d): d is Doc => d !== null) : [];
   return { version: 1, settings: normalizeSettings(data.settings), docs };
@@ -99,7 +99,7 @@ export function serializeBackup(data: StoreData, appVersion = "1.0.0"): string {
   return JSON.stringify({ kind: EXPORT_KIND, appVersion, exportedAt: new Date().toISOString(), data }, null, 2);
 }
 
-/** Parses a backup file. Throws a friendly Error when the file is not a Gstzen backup. */
+/** Parses a backup file. Throws a friendly Error when the file is not a GST Invoice backup. */
 export function parseBackup(text: string): StoreData {
   let raw: unknown;
   try {
@@ -108,7 +108,7 @@ export function parseBackup(text: string): StoreData {
     throw new Error("This file is not valid JSON.");
   }
   const store = normalizeStore(raw);
-  if (!store) throw new Error("This file is not a Gstzen backup.");
+  if (!store) throw new Error("This file is not a GST Invoice backup.");
   return store;
 }
 
@@ -117,4 +117,23 @@ export function mergeStores(current: StoreData, incoming: StoreData): StoreData 
   const map = new Map(current.docs.map((d) => [d.id, d]));
   for (const d of incoming.docs) map.set(d.id, d);
   return { ...current, docs: [...map.values()] };
+}
+
+type KeyValueStorage = Pick<Storage, "getItem" | "setItem" | "removeItem">;
+
+/**
+ * One-time move of data saved under the pre-rename keys, so people who used the
+ * first builds keep their documents and theme. Newer data under the current key wins.
+ */
+export function migrateLegacyStorage(ls: KeyValueStorage): void {
+  const pairs: [string, string][] = [
+    [LEGACY_STORAGE_KEY, STORAGE_KEY],
+    [LEGACY_THEME_KEY, THEME_KEY],
+  ];
+  for (const [oldKey, newKey] of pairs) {
+    const old = ls.getItem(oldKey);
+    if (old === null) continue;
+    if (ls.getItem(newKey) === null) ls.setItem(newKey, old);
+    ls.removeItem(oldKey);
+  }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { LEGACY_THEME_KEY, THEME_KEY } from "@/lib/keys";
 import { IconMoon, IconSun } from "./icons";
 
 function subscribe(cb: () => void) {
@@ -19,7 +20,7 @@ export function ThemeToggle() {
     const next = !dark;
     document.documentElement.classList.toggle("dark", next);
     try {
-      localStorage.setItem("gstzen:theme", next ? "dark" : "light");
+      localStorage.setItem(THEME_KEY, next ? "dark" : "light");
     } catch {}
   };
   return (
@@ -29,5 +30,5 @@ export function ThemeToggle() {
   );
 }
 
-/** Inline script that applies the saved theme before paint. */
-export const themeScript = `(function(){try{var t=localStorage.getItem("gstzen:theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}})()`;
+/** Inline script that applies the saved theme before paint (and moves a pre-rename theme key once). */
+export const themeScript = `(function(){try{var s=localStorage,t=s.getItem("${THEME_KEY}");if(t===null){t=s.getItem("${LEGACY_THEME_KEY}");if(t!==null){s.setItem("${THEME_KEY}",t);s.removeItem("${LEGACY_THEME_KEY}")}}if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}})()`;

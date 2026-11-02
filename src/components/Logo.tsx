@@ -15,7 +15,10 @@ export function Logo() {
   return (
     <span className="inline-flex items-center gap-2 font-semibold tracking-tight">
       <LogoMark />
-      <span className="text-[17px]">{BRAND.name}</span>
+      <span className="flex flex-col leading-none">
+        <span className="text-[17px]">{BRAND.name}</span>
+        <span className="mt-0.5 text-[10px] font-medium tracking-wide text-slate-500 dark:text-slate-400">by {BRAND.makerName}</span>
+      </span>
     </span>
   );
 }

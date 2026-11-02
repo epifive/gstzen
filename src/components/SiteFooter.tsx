@@ -10,7 +10,7 @@ export function SiteFooter() {
         <Disclaimer compact />
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            {BRAND.name} v{BRAND.version} · Open source (MIT) by{" "}
+            {BRAND.fullName} v{BRAND.version} · Open source (MIT) by{" "}
             <a className="font-medium text-slate-900 hover:underline dark:text-white" href={BRAND.makerUrl} target="_blank" rel="noopener">
               {BRAND.makerName}
             </a>

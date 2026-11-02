@@ -28,7 +28,7 @@ const FEATURES = [
 ];
 
 const FAQ: [string, string][] = [
-  ["Is it really free?", `Yes. ${BRAND.name} is open source under the MIT licence. Make unlimited invoices with no watermark. Pro is an optional one-time purchase for business features like a client library, recurring invoices and GSTR-1 style exports.`],
+  ["Is it really free?", `Yes. ${BRAND.fullName} is open source under the MIT licence. Make unlimited invoices with no watermark. Pro is an optional one-time purchase for business features like a client library, recurring invoices and GSTR-1 style exports.`],
   ["Is this GST e-invoicing (IRN)?", DISCLAIMER_TEXT],
   ["Where is my data stored?", "In your browser's local storage on this device. Nothing is uploaded. Clearing browser data deletes it, so download a JSON backup from Settings regularly. You can import it on another device."],
   ["How does the UPI QR work?", "Add your UPI ID (like yourname@okhdfc) in Settings. Each invoice shows a QR that opens any UPI app with your name, the amount due and the invoice number filled in. The money goes straight to your account; we never see it."],
@@ -53,7 +53,7 @@ export default function Home() {
     "@graph": [
       {
         "@type": "SoftwareApplication",
-        name: BRAND.name,
+        name: BRAND.fullName,
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
         description: "Free GST & VAT invoice, quotation and receipt maker with UPI QR. Runs in the browser.",

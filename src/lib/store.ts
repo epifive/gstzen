@@ -4,7 +4,7 @@ import { useSyncExternalStore } from "react";
 import { createDoc, emptyStore } from "./defaults";
 import { formatDocNumber } from "./numbering";
 import { sampleStore } from "./sample";
-import { normalizeStore, STORAGE_KEY } from "./storage";
+import { migrateLegacyStorage, normalizeStore, STORAGE_KEY } from "./storage";
 import type { Doc, DocType, Settings, StoreData } from "./types";
 
 type Listener = () => void;
@@ -18,6 +18,7 @@ const DEMO_SEED = process.env.NEXT_PUBLIC_DEMO_SEED === "1";
 function read(): StoreData {
   if (typeof window === "undefined") return emptyStore();
   try {
+    migrateLegacyStorage(window.localStorage);
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (raw) return normalizeStore(JSON.parse(raw)) ?? emptyStore();
     if (DEMO_SEED) {

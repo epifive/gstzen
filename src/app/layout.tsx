@@ -15,8 +15,8 @@ const description =
 export const metadata: Metadata = {
   metadataBase: new URL(BRAND.siteUrl),
   title: {
-    default: `${BRAND.name}: free GST invoice generator with UPI QR`,
-    template: `%s · ${BRAND.name}`,
+    default: `${BRAND.fullName}: free GST invoice generator with UPI QR`,
+    template: `%s · ${BRAND.fullName}`,
   },
   description,
   keywords: [
@@ -29,15 +29,15 @@ export const metadata: Metadata = {
     "vat invoice",
     "open source invoice",
   ],
-  applicationName: BRAND.name,
+  applicationName: BRAND.fullName,
   openGraph: {
     type: "website",
-    title: `${BRAND.name}: GST & VAT invoices with UPI QR`,
+    title: `${BRAND.fullName}: GST & VAT invoices with UPI QR`,
     description,
-    siteName: BRAND.name,
+    siteName: BRAND.fullName,
     url: "/",
   },
-  twitter: { card: "summary_large_image", title: `${BRAND.name}: GST & VAT invoices with UPI QR`, description },
+  twitter: { card: "summary_large_image", title: `${BRAND.fullName}: GST & VAT invoices with UPI QR`, description },
   alternates: { canonical: "/" },
 };
 

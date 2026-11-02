@@ -170,7 +170,7 @@ export default function DocumentsPage() {
                 type="button"
                 className="btn-secondary"
                 title="Download all documents as CSV"
-                onClick={() => downloadText(`gstzen-documents-${todayISO()}.csv`, documentsCsv(store.docs), "text/csv")}
+                onClick={() => downloadText(`gst-invoice-documents-${todayISO()}.csv`, documentsCsv(store.docs), "text/csv")}
               >
                 <IconDownload className="size-4" /> CSV
               </button>
@@ -178,7 +178,7 @@ export default function DocumentsPage() {
                 type="button"
                 className="btn-secondary"
                 title="Download a full JSON backup"
-                onClick={() => downloadText(`gstzen-backup-${todayISO()}.json`, serializeBackup(store), "application/json")}
+                onClick={() => downloadText(`gst-invoice-backup-${todayISO()}.json`, serializeBackup(store), "application/json")}
               >
                 <IconDownload className="size-4" /> Backup
               </button>

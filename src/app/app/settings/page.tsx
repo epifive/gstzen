@@ -161,10 +161,10 @@ function SettingsForm({ initial }: { initial: Settings }) {
               Everything lives in this browser&apos;s local storage. Download a backup regularly, and use it to move to another computer or browser.
             </p>
             <div className="flex flex-wrap gap-2">
-              <button type="button" className="btn-secondary" onClick={() => downloadText(`gstzen-backup-${todayISO()}.json`, serializeBackup(getStore()), "application/json")}>
+              <button type="button" className="btn-secondary" onClick={() => downloadText(`gst-invoice-backup-${todayISO()}.json`, serializeBackup(getStore()), "application/json")}>
                 <IconDownload className="size-4" /> Download JSON backup
               </button>
-              <button type="button" className="btn-secondary" onClick={() => downloadText(`gstzen-documents-${todayISO()}.csv`, documentsCsv(getStore().docs), "text/csv")}>
+              <button type="button" className="btn-secondary" onClick={() => downloadText(`gst-invoice-documents-${todayISO()}.csv`, documentsCsv(getStore().docs), "text/csv")}>
                 <IconDownload className="size-4" /> Documents CSV
               </button>
             </div>

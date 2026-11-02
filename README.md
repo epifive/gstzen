@@ -1,12 +1,12 @@
-# Gstzen: free GST invoice generator with UPI QR
+# EpiFive GST Invoice: free GST invoice generator with UPI QR
 
 **Make a clean GST or VAT invoice in 60 seconds. It includes a UPI QR so clients pay instantly, and exports to PDF.**
 
-Gstzen is an open-source invoice, quotation and receipt maker that runs entirely in your browser. It handles Indian GST properly (GSTIN check, place of supply, CGST + SGST or IGST, HSN/SAC tax summary, amount in words in lakh/crore) and also works for VAT, sales tax or no-tax invoices in 20+ currencies. No sign-up, no server, no trackers.
+EpiFive GST Invoice is an open-source invoice, quotation and receipt maker that runs entirely in your browser. It handles Indian GST properly (GSTIN check, place of supply, CGST + SGST or IGST, HSN/SAC tax summary, amount in words in lakh/crore) and also works for VAT, sales tax or no-tax invoices in 20+ currencies. No sign-up, no server, no trackers.
 
-**Live demo:** https://gstzen-demo.pages.dev (loads sample data on first visit; clear it from the yellow banner)
+**Live demo:** https://gst-invoice-demo.pages.dev (loads sample data on first visit; clear it from the yellow banner)
 
-![Gstzen landing page](screenshots/01-landing.png)
+![EpiFive GST Invoice landing page](screenshots/01-landing.png)
 
 | Editor with live A4 preview | Documents |
 |---|---|
@@ -30,7 +30,7 @@ Gstzen is an open-source invoice, quotation and receipt maker that runs entirely
 - **Light and dark mode**, responsive editor with an Edit/Preview switch on phones.
 
 > [!IMPORTANT]
-> **Not GST e-invoicing (IRN).** Gstzen makes regular GST tax invoices, quotations and receipts. It does not register invoices on the Invoice Registration Portal (IRP) and does not generate an IRN or the signed e-invoice QR code. Businesses that must issue e-invoices (aggregate turnover above the notified threshold, currently ₹5 crore) have to report B2B invoices on the IRP. You are responsible for tax rates, HSN/SAC codes and place of supply; check with your tax adviser. This is not legal or tax advice.
+> **Not GST e-invoicing (IRN).** EpiFive GST Invoice makes regular GST tax invoices, quotations and receipts. It does not register invoices on the Invoice Registration Portal (IRP) and does not generate an IRN or the signed e-invoice QR code. Businesses that must issue e-invoices (aggregate turnover above the notified threshold, currently ₹5 crore) have to report B2B invoices on the IRP. You are responsible for tax rates, HSN/SAC codes and place of supply; check with your tax adviser. This is not legal or tax advice.
 
 ## Free vs Pro
 
@@ -54,15 +54,15 @@ Gstzen is an open-source invoice, quotation and receipt maker that runs entirely
 | White-label (your name, logo, domain; no EpiFive branding) | | ✅ |
 | Licence | MIT | Commercial, 1 year of updates + support |
 
-**Get Pro (₹1,999 / $29, one-time): https://www.epifive.com/products/gstzen-pro**
+**Get Pro (₹1,999 / $29, one-time): https://www.epifive.com/products/gst-invoice-pro**
 
 ## Quick start
 
 Requirements: Node.js 20.9 or newer.
 
 ```bash
-git clone https://github.com/epifive/gstzen.git
-cd gstzen
+git clone https://github.com/epifive/gst-invoice.git
+cd gst-invoice
 npm install
 npm run dev        # http://localhost:3000
 ```
@@ -79,7 +79,7 @@ npm run build      # static site in out/
 
 | Variable | Default | What it does |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | `https://gstzen-demo.pages.dev` | Canonical URL used for SEO tags, sitemap and the OG image |
+| `NEXT_PUBLIC_SITE_URL` | `https://gst-invoice-demo.pages.dev` | Canonical URL used for SEO tags, sitemap and the OG image |
 | `NEXT_PUBLIC_DEMO_SEED` | unset | Set to `1` to load sample data on a visitor's first visit (used by the live demo) |
 
 ## Deploy
@@ -122,6 +122,6 @@ MIT © 2026 EpiFive. See [LICENSE](LICENSE).
 
 ---
 
-- Get Pro: https://www.epifive.com/products/gstzen-pro
+- Get Pro: https://www.epifive.com/products/gst-invoice-pro
 - More open-source projects: https://www.epifive.com/open-source
 - Need a custom app built? https://www.epifive.com/services#custom-app-development

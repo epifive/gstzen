@@ -126,7 +126,7 @@ function ItemRow({
           <label className="label" htmlFor={`${id}-u`}>
             Unit
           </label>
-          <input id={`${id}-u`} className="field field-sm" list="gstzen-units" value={item.unit} maxLength={10} onChange={(e) => set("unit", e.target.value)} />
+          <input id={`${id}-u`} className="field field-sm" list="gst-invoice-units" value={item.unit} maxLength={10} onChange={(e) => set("unit", e.target.value)} />
         </div>
         <div>
           <label className="label" htmlFor={`${id}-r`}>
@@ -184,7 +184,7 @@ export function ItemsEditor({
   };
   return (
     <div className="space-y-2">
-      <datalist id="gstzen-units">
+      <datalist id="gst-invoice-units">
         {UNITS.map((u) => (
           <option key={u} value={u} />
         ))}

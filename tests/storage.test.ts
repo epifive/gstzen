@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { mergeStores, normalizeStore, parseBackup, serializeBackup } from "@/lib/storage";
+import { mergeStores, migrateLegacyStorage, normalizeStore, parseBackup, serializeBackup } from "@/lib/storage";
+import { LEGACY_EXPORT_KIND, LEGACY_STORAGE_KEY, LEGACY_THEME_KEY, STORAGE_KEY, THEME_KEY } from "@/lib/keys";
 import { sampleStore } from "@/lib/sample";
 import { validateGstin } from "@/lib/gst";
 import { computeTotals } from "@/lib/calc";
@@ -39,5 +40,35 @@ describe("storage", () => {
       expect(computeTotals(d).total).toBeGreaterThan(0);
       if (d.client.gstin) expect(validateGstin(d.client.gstin).ok).toBe(true);
     }
+  });
+});
+
+describe("legacy key migration", () => {
+  const mem = (init: Record<string, string>) => {
+    const m = new Map(Object.entries(init));
+    return {
+      getItem: (k: string) => (m.has(k) ? m.get(k)! : null),
+      setItem: (k: string, v: string) => void m.set(k, v),
+      removeItem: (k: string) => void m.delete(k),
+      dump: () => Object.fromEntries(m),
+    };
+  };
+  it("moves pre-rename data and theme to the new keys once", () => {
+    const ls = mem({ [LEGACY_STORAGE_KEY]: "{\"docs\":[]}", [LEGACY_THEME_KEY]: "dark" });
+    migrateLegacyStorage(ls);
+    expect(ls.dump()).toEqual({ [STORAGE_KEY]: "{\"docs\":[]}", [THEME_KEY]: "dark" });
+    migrateLegacyStorage(ls);
+    expect(ls.dump()).toEqual({ [STORAGE_KEY]: "{\"docs\":[]}", [THEME_KEY]: "dark" });
+  });
+  it("keeps newer data under the current key", () => {
+    const ls = mem({ [LEGACY_STORAGE_KEY]: "old", [STORAGE_KEY]: "new" });
+    migrateLegacyStorage(ls);
+    expect(ls.dump()).toEqual({ [STORAGE_KEY]: "new" });
+  });
+  it("imports backups made before the rename", () => {
+    const s = sampleStore(new Date(2026, 10, 1));
+    const old = JSON.parse(serializeBackup(s));
+    old.kind = LEGACY_EXPORT_KIND;
+    expect(parseBackup(JSON.stringify(old)).docs.length).toBe(s.docs.length);
   });
 });

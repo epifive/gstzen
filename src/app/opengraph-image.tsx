@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const dynamic = "force-static";
-export const alt = "Gstzen: GST & VAT invoice maker with UPI QR";
+export const alt = "EpiFive GST Invoice: GST & VAT invoice maker with UPI QR";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -24,7 +24,7 @@ export default function OgImage() {
             <div style={{ width: 56, height: 56, borderRadius: 14, background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", color: "#4f46e5", fontSize: 34 }}>
               ₹
             </div>
-            Gstzen
+            EpiFive GST Invoice
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: 64, fontWeight: 800, lineHeight: 1.05 }}>GST invoices with a UPI QR</div>

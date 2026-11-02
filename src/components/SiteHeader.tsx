@@ -21,7 +21,7 @@ export function SiteHeader() {
   return (
     <header className="no-print sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur dark:border-slate-800 dark:bg-slate-950/85">
       <div className="mx-auto flex h-14 max-w-7xl items-center gap-4 px-4 sm:px-6">
-        <Link href="/" className="shrink-0" aria-label={`${BRAND.name} home`}>
+        <Link href="/" className="shrink-0" aria-label={`${BRAND.fullName} home`}>
           <Logo />
         </Link>
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
